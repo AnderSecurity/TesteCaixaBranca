@@ -15,5 +15,7 @@ A fórmula é dada por "qtd. de caminhos = arestas - nós + 2". Logo, temos 15 a
 Temos 3 caminhos:
 
 A) 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 13 - 14: Um Exception caso não haja conexão com o banco de dados;
+<br>
 B) 1 - 2 - 3 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 13 - 14: Houve conexão com o banco de dados e o resultado foi encontrado;
+<br>
 C) 1 - 2 - 3 - 5 - 6 - 7 - 8 - 9 - 10 - 12 - 13 - 14: Exception caso o usuário não fosse encontrado.
