@@ -1,18 +1,19 @@
-# Teste da Caixa Branca
+# 1) Extração dos Dados - Grafo
 
-O código do repositório possui alguns problemas a serem resolvidos:
+![grafo](https://github.com/AnderSecurity/TesteCaixaBranca/assets/114704633/a340de17-fa80-4191-9dea-766a849b14ac)
 
-# 1) Organização do código
-A organização deveria ser melhorada para uma melhor estética, como por exemplo:
-a) Criar as variáveis no começo da classe (linhas 17 e 18), como é feito por padrão;
-b) Os dois "Catch's" deveriam retornar uma mensagem de erro ao usuário, a fim de orientar o motivo do erro, nas linhas 15 e 32;
-c) A chave que fecha o catch (linha 16) deveria estar na linha de baixo, para mostrar o encerramento do catch com mais facilidade. Além disso, o "return conn;" deveria estar com um espaçamento TAB para mostrar que está dentro do catch.
+# 2) Grafo de Fluxo
 
-# 2) Vulnerabilidade
-A utilização de strings por via da lista na conexão com o SQL deixa-o com vulnerabilidade SQL injection, utilizados nas linhas 23, 24 e 25.
+![fluxo](https://github.com/AnderSecurity/TesteCaixaBranca/assets/114704633/cc6cc003-55b1-4874-a39e-b67ba8a7e5b0)
 
-# 3) Try-Catch-Finally
-Na utilização do Try Catch, deve-se usar o Finally para encerrar as conexões com o SQL, visto que nenhuma foi encerrada devidamente no código (linhas 15 e 32).
+# 3) Complexidade Clclomática
 
-# 4) Comentários no Código
-Deve-se utilizar mais comentários no código, para que se outros desenvolvedores precisem realizar a manutenção no código.
+A fórmula é dada por "qtd. de caminhos = arestas - nós + 2". Logo, temos 15 arestas e 14 nós, totalizando 1+2 = 3 caminhos.
+
+# 4) Caminhos
+
+Temos 3 caminhos:
+
+A) 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 13 - 14: Um Exception caso não haja conexão com o banco de dados;
+B) 1 - 2 - 3 - 5 - 6 - 7 - 8 - 9 - 10 - 11 - 13 - 14: Houve conexão com o banco de dados e o resultado foi encontrado;
+C) 1 - 2 - 3 - 5 - 6 - 7 - 8 - 9 - 10 - 12 - 13 - 14: Exception caso o usuário não fosse encontrado.
