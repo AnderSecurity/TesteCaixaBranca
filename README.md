@@ -1,18 +1,99 @@
-# Teste da Caixa Branca
+# Etapa 3 - Documentação
 
-O código do repositório possui alguns problemas a serem resolvidos:
+A documentação do código é fundamental para que o código tenha um melhor entendimento para manutenibilidade de desenvolvedores futuros, melhor qualidade de software e possibilita que o conhecimento do código não seja perdido.
 
-# 1) Organização do código
-A organização deveria ser melhorada para uma melhor estética, como por exemplo:
-a) Criar as variáveis no começo da classe (linhas 17 e 18), como é feito por padrão;
-b) Os dois "Catch's" deveriam retornar uma mensagem de erro ao usuário, a fim de orientar o motivo do erro, nas linhas 15 e 32;
-c) A chave que fecha o catch (linha 16) deveria estar na linha de baixo, para mostrar o encerramento do catch com mais facilidade. Além disso, o "return conn;" deveria estar com um espaçamento TAB para mostrar que está dentro do catch.
+# Java
+Um exemplo simples de documentação em Java que pode ser vista em código é a seguinte:
+```
+  /**
+  * Descrição de uma classe, como sua função.
+  * @return documentação
+  */
+```
 
-# 2) Vulnerabilidade
-A utilização de strings por via da lista na conexão com o SQL deixa-o com vulnerabilidade SQL injection, utilizados nas linhas 23, 24 e 25.
+# Código documentado
+```
+  /**
+  * Início do Código
+  * 
+  */
 
-# 3) Try-Catch-Finally
-Na utilização do Try Catch, deve-se usar o Finally para encerrar as conexões com o SQL, visto que nenhuma foi encerrada devidamente no código (linhas 15 e 32).
+  package login;
 
-# 4) Comentários no Código
-Deve-se utilizar mais comentários no código, para que se outros desenvolvedores precisem realizar a manutenção no código.
+  import java.sql.Connection;
+  import java.sql.DriverManager;
+  import java.sql.ResultSet;
+  import java.sql.Statement;
+
+  public class User {
+    
+    /**
+    * Classe utilizada para criar a conexão do banco de dados com o sistema.
+    * Para possibilitar a comunicação de dados armazenados.
+    */
+    public Connection conectarBD() {
+        /**
+         * Inicializa a variável de conexão com o banco de dados.
+         * Responsável por sinalizar se a conexão foi feita com êxito.
+         * 
+         * @return conexão com o banco de dados
+         */
+        Connection conn = null;
+        
+        /**
+         * Tentativa de conexão com o banco de dados.
+         * Primeiro é passado o caminho MYSQL, após isso a url de conexão do banco de dados e a tentativa de conexão.
+         */
+        try {
+            Class.forName("com.mysql.Driver.Manager").newInstance();
+            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";
+            conn = DriverManager.getConnection(url);
+        } catch (Exception e) {}
+        
+        return conn;
+    }
+    
+    /**
+     * Variáveis para receber um nome do tipo String e o resultado da conexão.
+     */
+    
+    public String nome="";
+    public boolean result = false;
+    
+    /**
+     * Classe utilizada para verificar se o usuário existe.
+     * @param login
+     * @param senha
+     * @return resultado de conexão
+     */
+    
+    public boolean verificarUsuario(String login, String senha) {
+        String sql = "";
+        Connection conn = conectarBD();
+        
+        //INSTRUÇÃO SQL
+        sql += "select nome from usuarios ";
+        sql += "where login = " + "'" + login + "'";
+        sql += " and senha = " + "'" + senha + "';";
+        
+        /**
+         * Executar a instrução SQL para retornar os dados de pesquisa.
+         */
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            if(rs.next()) {
+                result = true;
+                nome = rs.getString("nome");
+            }
+            
+        } catch (Exception e){}
+            return result;
+    }
+} //Fim da class
+
+/**
+* Fim do código
+*/
+```
